@@ -1,4 +1,4 @@
-Synchronised of git
+
 1. difference between set and list
 List<E>:
 
