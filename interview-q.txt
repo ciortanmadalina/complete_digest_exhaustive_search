@@ -1,6 +1,4 @@
-*****
-
-On github
+Synchronised of git
 1. difference between set and list
 List<E>:
 
@@ -373,6 +371,7 @@ Activity Diagrams : An activity diagram depicts the flow of activities which are
 Activity diagrams comprise of: Activity states and action states, Transitions, Objects
 Activity diagrams are used for modeling: workflows as viewed by actors, interacting with the system.details of operations or computations using flowcharts.
 
+
 15. Spring AOP
  What is the difference between concern and cross-cutting concern in Spring AOP
 The Concern is behavior we want to have in a module of an application. A Concern may be defined as a functionality we want to implement.
@@ -393,3 +392,5 @@ The pointcut is a set of one or more joinpoints where an advice should be execut
 An Introduction allows us to add new methods or attributes to existing classes.
 What is Target object?
 The target object is an object being advised by one or more aspects. It will always be a proxy object. It is also referred to as the advised object.
+
+Test git
