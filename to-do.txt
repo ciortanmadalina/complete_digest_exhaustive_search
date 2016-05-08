@@ -1,1 +1,3 @@
-Learn React JS
+git remote add origin url
+git push origin master
+git pull origin master
