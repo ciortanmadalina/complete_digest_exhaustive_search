@@ -19,17 +19,13 @@ class DigestTest(unittest.TestCase):
 
     def test_lengthsToPositions(self):
         input = [1, 3, 3, 2]
-        result = digest.lengthsToPositions(input)
-        self.assertEqual(result, [1, 3, 3, 2])
+        result = digest.cutpoints(input)
+        self.assertEqual(result, [1, 4, 7])
 
-    def test_lengthsToPositionsOneElement(self):
-        input = [1]
-        result = digest.lengthsToPositions(input)
-        self.assertEqual(result, [1])
 
     def test_lengthsToPositionsNoElement(self):
         input = []
-        result = digest.lengthsToPositions(input)
+        result = digest.cutpoints(input)
         self.assertEqual(result, [])
 
     def test_positions_difference(self):

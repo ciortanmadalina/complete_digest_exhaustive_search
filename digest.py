@@ -8,8 +8,7 @@ def getInputFromFile(filename):
     f.close()
     return input
 
-input = getInputFromFile('input2')
-print("Input : ",  input)
+
 
 def allPermutations(inputArray):
     ''''
@@ -31,15 +30,18 @@ def allPermutations(inputArray):
     return result
 
 
-def lengthsToPositions(inputArray):
+def cutpoints(inputArray):
     '''
     Generates DNA positions from subsequence lengths.
-    For instance [1, 3, 3, 2]  produces [1, 4, 7, 9]
+    For instance [1, 3, 3, 2]  produces [1, 4, 7]
+    This method omits the last element as it is not a cutpoint but the final
+    position of the string. If we don't do this operation, all cutpoints will include as
+    final element the length which is not a cutpoint.
     :param inputArray:
     :return: positions array
     '''
     positions = []
-    for i in range(len(inputArray)):
+    for i in range(len(inputArray) - 1):
         if i == 0 :
             positions.append(inputArray[0])
         else:
@@ -48,13 +50,17 @@ def lengthsToPositions(inputArray):
     return positions
 
 
-def positionsDifference(allPositions):
+def positionsDifference(allPositionsCutpoints, lastElement):
     '''
-    [[1, 4, 8], [2, 5]] will generate [1, 1, 1, 2, 3]
+    ([1, 4, 8], [2, 5]) will generate [1, 1, 1, 2, 3]
     :param allPositions:
     :return: the total sorted complete digest for  the input position sequences
     '''
-    flatPositions = reduce( (lambda x, y: x + y), allPositions )
+    flatPositions = []
+    for position in allPositionsCutpoints:
+        flatPositions.extend(position)
+    #flatPositions = reduce( (lambda x, y: x + y), allPositions )
+    flatPositions.append(lastElement)
     flatPositions.sort()
     delta = [flatPositions[0]]
     for i in range(1, len(flatPositions)):
@@ -70,21 +76,53 @@ def isSolution(kPositions, totalDifference):
     :param totalDifference:
     :return: true when the difference for all k positions matches totalDifference
     '''
-    return positionsDifference(kPositions) == totalDifference
+    return positionsDifference(kPositions, sum(totalDifference) ) == totalDifference
 
 
+def cartesian (lists):
+    ''''
+    This method generates recursively the cartesian product of input lists
+    [ [[2,3],[4,5]], [[6,7],[8,9]] ] produces
+    [([2, 3], [6, 7]), ([2, 3], [8, 9]), ([4, 5], [6, 7]), ([4, 5], [8, 9])]
+    '''
+    if lists == []: return [()]
+    firstList = lists[0]
+    remainingLists = lists[1:]
+    result = []
+    for x in firstList:
+        for y in cartesian(remainingLists):
+            firstListElementToTuple = (x,)
+            result.append(firstListElementToTuple + y)
+    return result
 
 def exhaustiveSearch(input):
     totalDifference = input[-1] #last line is the total complete digest
-    print('tot', totalDifference)
+
     allKPermutations = []
     for i in range(len(input) - 1):
         permutations = allPermutations(input[i])
-        positions = [lengthsToPositions(i) for i in permutations]
+        positions = [cutpoints(i) for i in permutations]
         allKPermutations.append(positions)
 
-#print(positionsDifference([[1,4,8], [2,5]]))
-#print(lengthsToPositions([1,3,3, 2]))
-#print(allPermutations([1, 2, 3, 4]))
-print(exhaustiveSearch(input))
+    kCartesianProduct = cartesian(allKPermutations)
+    print('We have ', len(kCartesianProduct), ' solutions' )
+    for solution in kCartesianProduct:
+        if isSolution(solution, totalDifference):
+            print('Found solution :', solution)
+            #as requested, we stop algorithm after finding the first solution
+            #otherwise it would continue generating all solutions
+            return solution
+
+
+
+
+
+
+#########################
+#RUN
+#########################
+
+input = getInputFromFile('example')
+print("Input file: ",  input)
+exhaustiveSearch(input)
 
