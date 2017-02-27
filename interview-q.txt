@@ -1,0 +1,396 @@
+
+1. difference between set and list
+List<E>:
+
+An ordered collection (also known as a sequence). The user of this interface has precise control over where in the list each element is inserted. The user can access elements by their integer index (position in the list), and search for elements in the list.
+Set<E>:
+
+A collection that contains no duplicate elements. More formally, sets contain no pair of elements e1 and e2 such that e1.equals(e2), and at most one null element. As implied by its name, this interface models the mathematical set abstraction.
+2. What is OCP (Open Closed Principle)?
+
+3. In optimistic locking how do we verify that the object was not modified? 
+version
+4. Write a singleton class
+public class CrunchifySingleton {
+ 
+	private static CrunchifySingleton instance = null;
+ 
+	protected CrunchifySingleton() {
+	}
+ 
+	// Lazy Initialization (If required then only)
+	public static CrunchifySingleton getInstance() {
+		if (instance == null) {
+			// Thread Safe. Might be costly operation in some case
+			synchronized (CrunchifySingleton.class) {
+				if (instance == null) {
+					instance = new CrunchifySingleton();
+				}
+			}
+		}
+		return instance;
+	}
+}
+
+or 
+public class Singleton{
+    private static final Singleton INSTANCE = new Singleton();
+  
+    private Singleton(){ }
+
+    public static Singleton getInstance(){
+        return INSTANCE;
+    }
+    public void show(){
+        System.out.println("Singleon using static initialization in Java");
+    }
+}
+
+//Here is how to access this Singleton class
+Singleton.getInstance().show();
+
+
+Read more: http://javarevisited.blogspot.com/2012/12/how-to-create-thread-safe-singleton-in-java-example.html#ixzz47y3vHtpv
+
+5. Fizz Buzz print game
+public static List<String> fizzBuzz(final int n) {
+final List<String> toReturn = new ArrayList<>(n);
+for (int i = 1; i <= n; i++) {
+if(i % 15 == 0) {
+toReturn.add("FizzBuzz");
+} else if (i % 3 == 0) {
+toReturn.add("Fizz");
+} else if (i % 5 == 0) {
+toReturn.add("Buzz");
+} else {
+toReturn.add(Integer.toString(i));
+}
+}
+return toReturn;
+}
+6. What is SAML?
+
+7. What inheritance mappings are used in Hibernate?
+
+1 table per class hierarchy
+
+@Entity
+@Table(name = "PERSON")
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(
+    name="discriminator",
+    discriminatorType=DiscriminatorType.STRING
+)
+@DiscriminatorValue(value="P")
+public class Person {
+ 
+    @Id
+    @GeneratedValue
+    @Column(name = "PERSON_ID")
+    private Long personId;
+     
+    @Column(name = "FIRSTNAME")
+    private String firstname;
+     
+    @Column(name = "LASTNAME")
+    private String lastname;
+     
+    // Constructors and Getter/Setter methods, 
+}
+
+@Entity
+@Table(name="PERSON")
+@DiscriminatorValue("E")
+public class Employee extends Person {
+ 
+    @Column(name="joining_date")
+    private Date joiningDate;
+     
+    @Column(name="department_name")
+    private String departmentName;
+ 
+    // Constructors and Getter/Setter methods, 
+}
+
+
+table per subclass
+
+
+@Entity
+@Table(name = "PERSON")
+@Inheritance(strategy=InheritanceType.JOINED)
+public class Person {
+ 
+    @Id
+    @GeneratedValue
+    @Column(name = "PERSON_ID")
+    private Long personId;
+     
+    @Column(name = "FIRSTNAME")
+    private String firstname;
+     
+    @Column(name = "LASTNAME")
+    private String lastname;
+     
+    public Person() {
+     
+    }
+    public Person(String firstname, String lastname) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+    }
+ 
+    // Getter and Setter methods, 
+}
+
+@Entity
+@Table(name="EMPLOYEE")
+@PrimaryKeyJoinColumn(name="PERSON_ID")
+public class Employee extends Person {
+ 
+    @Column(name="joining_date")
+    private Date joiningDate;
+     
+    @Column(name="department_name")
+    private String departmentName;
+ 
+    public Employee() {
+    }
+     
+    public Employee(String firstname, String lastname, String departmentName, Date joiningDate) {
+         
+        super(firstname, lastname);
+         
+        this.departmentName = departmentName;
+        this.joiningDate = joiningDate;
+    }
+ 
+    // Getter and Setter methods, 
+}
+
+@Entity
+@Table(name="OWNER")
+@PrimaryKeyJoinColumn(name="PERSON_ID")
+public class Owner extends Person {
+ 
+    @Column(name="stocks")
+    private Long stocks;
+     
+    @Column(name="partnership_stake")
+    private Long partnershipStake;
+ 
+    public Owner() {
+    }
+     
+    public Owner(String firstname, String lastname, Long stocks, Long partnershipStake) {
+         
+        super(firstname, lastname);
+         
+        this.stocks = stocks;
+        this.partnershipStake = partnershipStake;
+    }
+ 
+    // Getter and Setter methods, 
+}
+
+@PrimaryKeyJoinColumn – This annotation specifies a primary key column that is used as a foreign key to join to another table
+table per concrete class
+
+8. Examples of design patterns in Java
+Decorator design pattern which is used in various Java IO classes: BufferedReader and BufferedWriter which enhances Reader and Writer objects to perform Buffer level reading and writing for improved performance
+Decorator design pattern is used to enhance the functionality of a particular object at run-time or dynamically.
+
+Strategy: Strategy pattern in quite useful for implementing set of related algorithms e.g. compression algorithms, filtering strategies etc. 
+Strategy design pattern allows you to create Context classes, which uses Strategy implementation classes for applying business rules. This pattern follow open closed design principle and quite useful in Java. 
+One example of Strategy pattern from JDK itself is a Collections.sort() method and Comparator interface, which is a strategy interface and defines strategy for comparing objects. 
+Because of this pattern, we don't need to modify sort() method (closed for modification) to compare any object, at same time we can implement Comparator interface to define new comparing strategy (open for extension).
+
+Singleton pattern which is used in Runtime , Calendar and various other classes 
+Factory pattern which is used along with various Immutable classes likes Boolean e.g. Boolean.valueOf 
+
+Observer pattern which is used in Swing and many event listener frameworks.
+public class ButtonWithEventListener {
+  public static void main(String[] args) {
+    Display display = new Display();
+    Shell shell = new Shell(display);
+    shell.setLayout(new GridLayout());
+
+    Button button = new Button(shell, SWT.NONE);
+    button.setText("Click and check the console");
+    button.addListener(SWT.Selection, new Listener() {
+      public void handleEvent(Event e) {
+        switch (e.type) {
+        case SWT.Selection:
+          System.out.println("Button pressed");
+          break;
+        }
+      }
+    });
+
+    shell.open();
+    while (!shell.isDisposed()) {
+      if (!display.readAndDispatch()) {
+        display.sleep();
+      }
+    }
+  }
+}
+
+S.O.L.I.D is an acronym for the first five object-oriented design(OOD) principles by Robert C. Martin, popularly known as Uncle Bob.
+S.O.L.I.D STANDS FOR:
+
+When expanded the acronyms might seem complicated, but they are pretty simple to grasp.
+
+S – Single-responsiblity principle :A class should have one and only one reason to change, meaning that a class should have only one job.
+O – Open-closed principle : Objects or entities should be open for extension, but closed for modification.: There are several design patterns which are based upon open closed design principle e.g. 
+Strategy pattern if you need a new strategy, just implement the interface and configure, no need to modify core logic. One working example is Collections.sort() method which is based on Strategy pattern and follows the open-closed principle, 
+you don't modify sort() method to sort a new object, what you do is just implement Comparator in your own way.
+L – Liskov substitution principle : Derived classes must be substitutable for their base classes. Liskov substitution principle asserts that every subtype should be able to work as the proxy for parent type. For example, if a method except object of Parent class then it should work as expected if you pass an object of the Child class. Any class which cannot stand in place of its parent violate LSP or Liskov substitution principle.
+I – Interface segregation principle :Make fine grained interfaces that are client specific. A client should never be forced to implement an interface that it doesn’t use or clients shouldn’t be forced to depend on methods they do not use.
+D – Dependency Inversion Principle : Depend on abstractions, not on concretions. It states that the high level module must not depend on the low level module, but they should depend on abstractions.
+Let’s look at each principle individually to understand why S.O.L.I.D can help make us better developers.
+
+
+
+9. Does java pass by value or by reference?
+public class PassByReferenceConfusion {
+  
+    public static void main(String args[]) {
+       Car car = new Car("BMW");
+       System.out.println("Brand of Car Inside main() before: "+ car.brand);
+       printBrand(car);
+       System.out.println("Brand of Car Inside main()after: "+ car.brand);
+    }
+  
+    public static void printBrand(Car car){
+        car.brand = "Maruti";
+        System.out.println("Brand of Car Inside printBrand(): "+car.brand);
+    }
+  
+    private static class Car{
+        private String brand;
+      
+        public Car(String brand){
+            this.brand = brand;
+        }
+
+    }
+}
+
+Output:
+Brand of Car Inside main() before: BMW
+Brand of Car Inside printBrand(): Maruti
+Brand of Car Inside main()after: Maruti
+
+If you see change made in method parameter is reflected globally i.e. brand of car is changed in all places it means one object is used in both method. Well in reality if you pass object as method parameter in Java  it passes "value of reference" or in simple term object reference or handle to Object in Java. Here reference term is entirely different than reference term used in C and C+ which directly points to memory address of variable and subject to pointer arithmetic. in Java object can only be accessed by its reference as you can not get memory address where object is stored or more precisely there is no method to get value of object by passing memory address.
+
+To conclude everything in Java including primitive and objects are pass by value. In case of object value of reference is passed.
+
+
+Read more: http://javarevisited.blogspot.com/2012/12/does-java-pass-by-value-or-pass-by-reference.html#ixzz47yTxW1Zr
+
+10. A number is a power of 2 : x & (x-1)
+There's a simple trick for this problem:
+
+bool IsPowerOfTwo(ulong x)
+{
+    return (x & (x - 1)) == 0;
+}
+For completeness, zero is not a power of two. If you want to take into account that edge case, here's how:
+
+bool IsPowerOfTwo(ulong x)
+{
+    return (x != 0) && ((x & (x - 1)) == 0);
+}
+Explanation
+First and foremost the bitwise binary & operator from MSDN definition:
+
+Binary & operators are predefined for the integral types and bool. For integral types, & computes the logical bitwise AND of its operands. For bool operands, & computes the logical AND of its operands; that is, the result is true if and only if both its operands are true.
+Now let's take a look at how this all plays out:
+
+The function returns boolean (true / false) and accepts one incoming parameter of type unsigned long (x, in this case). Let us for the sake of simplicity assume that someone has passed the value 4 and called the function like so:
+
+bool b = IsPowerOfTwo(4)
+Now we replace each occurrence of x with 4:
+
+return (4 != 0) && ((4 & (4-1)) == 0);
+Well we already know that 4 != 0 evals to true, so far so good. But what about:
+
+((4 & (4-1)) == 0)
+This translates to this of course:
+
+((4 & 3) == 0)
+But what exactly is 4&3?
+
+The binary representation of 4 is 100 and the binary representation of 3 is 011 (remember the & takes the binary representation of these numbers. So we have:
+
+100 = 4
+011 = 3
+Imagine these values being stacked up much like elementary addition. The & operator says that if both values are equal to 1 then the result is 1, otherwise it is 0. So 1 & 1 = 1, 1 & 0 = 0, 0 & 0 = 0, and 0 & 1 = 0. So we do the math:
+
+100
+011
+----
+000
+The result is simply 0. So we go back and look at what our return statement now translates to:
+
+return (4 != 0) && ((4 & 3) == 0);
+Which translates now to:
+
+return true && (0 == 0);
+return true && true;
+We all know that true && true is simply true, and this shows that for our example, 4 is a power of 2.
+
+11. What will happen if you put return statement or System.exit () on try or catch block? Will finally block execute?
+This is a very popular tricky Java question and it's tricky because many programmers think that no matter what, but the finally block will always execute. This question challenge that concept by putting a return statement in the try or catch block or calling System.exit from try or catch block. Answer of this tricky question in Java is that finally block will execute even if you put a return statement in the try block or catch block but finally block won't run if you call System.exit form try or catch.
+12. What do the expression 1.0 / 0.0 will return? will it throw Exception? any compile time error?
+Answer: This is another tricky question from Double class. Though Java developer knows about the double primitive type and Double class, while doing floating point arithmetic they don't pay enough attention to Double.INFINITY, NaN, and -0.0 and other rules that govern the arithmetic calculations involving them. The simple answer to this question is that it will not throw ArithmeticExcpetion and return Double.INFINITY. Also, note that the comparison x == Double.NaN always evaluates to false, even if x itself is a NaN. To test if x is a NaN, one should use the method call Double.isNaN(x) to check if given number is NaN or not. If you know SQL, this is very close to NULL there.
+
+Read more: http://java67.blogspot.com/2012/09/top-10-tricky-java-interview-questions-answers.html#ixzz47yrytqa8
+
+13. Transactions properties:
+ACID (Atomicity, Consistency, Isolation, Durability) is a set of properties that guarantee that database transactions are processed concurrently. 
+In the context of databases, a single logical operation on the data is called a transaction. 
+For example, a transfer of funds from one bank account to another, even involving multiple changes such as debiting one account and crediting another, is a single transaction.
+
+14. UML diagrams
+1. Structural : 
+class diagram
+object diagram
+Component Diagram Component diagrams show the organization and dependencies among a group of components. Component diagrams comprise of: Components, Interfaces, Relationships, Packages and Subsystems (optional)
+Deployment Diagram: A deployment diagram puts emphasis on the configuration of runtime processing nodes and their components that live on them. They are commonly comprised of nodes and dependencies, or associations between the nodes.
+2. Behavioral 
+Use case diagrams :Use case diagrams present an outside view of the manner the elements in a system behave and how they can be used in the context.
+Use case diagrams comprise of: Use cases, Actors,Relationships like dependency, generalization, and association
+
+Sequence Diagrams Sequence diagrams are interaction diagrams that illustrate the ordering of messages according to time.
+
+State–Chart Diagrams :A state–chart diagram shows a state machine that depicts the control flow of an object from one state to another. A state machine portrays the sequences of states which an object undergoes due to events and their responses to events
+
+Activity Diagrams : An activity diagram depicts the flow of activities which are ongoing non-atomic operations in a state machine. Activities result in actions which are atomic operations.
+Activity diagrams comprise of: Activity states and action states, Transitions, Objects
+Activity diagrams are used for modeling: workflows as viewed by actors, interacting with the system.details of operations or computations using flowcharts.
+
+
+15. Spring AOP
+ What is the difference between concern and cross-cutting concern in Spring AOP
+The Concern is behavior we want to have in a module of an application. A Concern may be defined as a functionality we want to implement.
+The cross-cutting concern is a concern which is applicable throughout the application and it affects the entire application. For example, logging, security and data transfer are the concerns which are needed in almost every module of an application, hence they are cross-cutting concerns.
+Join point
+The join point represents a point in an application where we can plug-in an AOP aspect. It is the actual place in the application where an action will be taken using Spring AOP framework.
+ Advice
+The advice is the actual action that will be taken either before or after the method execution. This is actual piece of code that is invoked during the program execution by the Spring AOP framework.
+Spring aspects can work with five kinds of advice:
+before: Run advice before the a method execution.
+after: Run advice after the a method execution regardless of its outcome.
+after-returning: Run advice after the a method execution only if method completes successfully.
+after-throwing: Run advice after the a method execution only if method exits by throwing an exception.
+around: Run advice before and after the advised method is invoked.
+ Pointcut
+The pointcut is a set of one or more joinpoints where an advice should be executed. You can specify pointcuts using expressions or patterns.
+ What is Introduction?
+An Introduction allows us to add new methods or attributes to existing classes.
+What is Target object?
+The target object is an object being advised by one or more aspects. It will always be a proxy object. It is also referred to as the advised object.
+
+Test git
