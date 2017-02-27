@@ -1,4 +1,4 @@
-from functools import reduce
+
 def getInputFromFile(filename):
     input = []
     f = open(filename, 'r')
