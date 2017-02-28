@@ -49,6 +49,12 @@ _output_ folder contains the output files of the optimised version for both comp
 Complete digest problem is a hard NP problem. Working just with the lengths 
 of the segments creates too much ambiguity and many solutions.
 
+This project contains my first brute force implementation detailed below and also an
+optimised version for both complete search and one solution search problems. 
+
+
+### Pseudocode 
+
 ```
 BruteForceCompleteDigest(inputSets)  
   k <- inputSets.size  
@@ -131,11 +137,14 @@ optimisedCompleteDigestOneSolution(inputSets)
 
 ```
 
+### Algorithm complexity evaluation and conclusions
+
 The complexity of this algorithm is in the generation of the cartesian product, which is exponential O(k^number_of_permutations).
   
 The complexity of generating the permutations is O(n!)
 
-Calculation time depends on the input size. For instance, for k2 example execution time is 0.018501758575439453 s.
+Calculation time depends on the input size and grows exponentially as we add lines (k) or cutpoints (increases the number of permutations).  
+As a concrete example, for k2 example execution time is 0.018501758575439453 s.
 
 In order to remove overlaps I chose a bitwise implementation with the numpy library 
 but it would have been more efficient to store it directly as bits of an int, but this would have introduced the complexity of having
