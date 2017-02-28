@@ -1,5 +1,5 @@
 
 Solution : 
-[0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0] or segments of lengths : [2, 7, 9]
-[0 0 0 0 1 0 0 0 0 1 0 0 0 1 0 0 0 0] or segments of lengths : [4, 4, 5, 5]
-[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0] or segments of lengths : [2, 16]
+[0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0] or segments of lengths : [2, 11]
+[0 0 0 0 1 0 0 0 0 1 0 0 0 1 0 0 0 0] or segments of lengths : [4, 9, 13]
+[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0] or segments of lengths : [16]

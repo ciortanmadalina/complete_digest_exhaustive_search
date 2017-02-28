@@ -27,7 +27,7 @@ class OptimisedTest(unittest.TestCase):
 
     def test_segmentToBitwiseCutpointsConverter(self):
         input = [1, 3, 3, 2, 1]
-        result = optimised.bitewiseCutpointsToSortedSegments(optimised.segmentsToBitewiseCutpoints(input))
+        result = optimised.bitewiseCutpointsToSegments(optimised.segmentsToBitewiseCutpoints(input))
         self.assertEqual(result, input.sort())
 
     def test_tuple_overlaps(self):

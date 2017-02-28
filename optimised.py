@@ -64,10 +64,24 @@ def segmentsToBitewiseCutpoints(inputArray):
     return positions
 
 
-def bitewiseCutpointsToUnsortedSegments(inputArray):
+def segmentsToPositions(inputArray):
+    '''
+    This method returns the positions in decimal from the bitwise form:
+    [0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0]  gives [7, 16]
+    :param inputArray:
+    :return: segment sizes array from bitwise cutpoints input
+    '''
+    positions = []
+    for i in range(len(inputArray)):
+        if(inputArray[i] == 1) :
+            positions.append(i)
+
+    return positions
+
+def bitewiseCutpointsToSegments(inputArray):
     '''
     This method is the inverse of segmentsToBitewiseCutpoints
-    For instance for [0 1 0 0 1 0 0 1 0 1] it produces the sorted [1, 3, 3, 2, 1]
+    For instance for [0 1 0 0 1 0 0 1 0 1] it produces the sorted [1, 1, 2, 3, 3]
 
     This method will be used to check of the segments resulting from the
     combination of k lines match the total input difference
@@ -83,19 +97,6 @@ def bitewiseCutpointsToUnsortedSegments(inputArray):
             segments.append(segmentSize + 1)
             segmentSize = 0
     segments.append(segmentSize + 1) #add the last element
-    return segments
-
-def bitewiseCutpointsToSortedSegments(inputArray):
-    '''
-    This method is the inverse of segmentsToBitewiseCutpoints
-    For instance for [0 1 0 0 1 0 0 1 0 1] it produces the sorted [1, 1, 2, 3, 3]
-
-    This method will be used to check of the segments resulting from the
-    combination of k lines match the total input difference
-    :param inputArray:
-    :return: segment sizes array from bitwise cutpoints input
-    '''
-    segments = bitewiseCutpointsToUnsortedSegments(inputArray)
     segments.sort()
     return segments
 
@@ -111,7 +112,7 @@ def isSolution(tuple, totalDifference):
     for tupleElement in tuple:
         sum += np.array(tupleElement)
 
-    return bitewiseCutpointsToSortedSegments(sum) == totalDifference
+    return bitewiseCutpointsToSegments(sum) == totalDifference
 
 
 def completeCartesian (lists):
@@ -156,8 +157,8 @@ def solutionToFile(solution, file):
     print("Solution : ")
     file.write("\nSolution : \n")
     for line in solution:
-        print(line, ' or segments of lengths : ', bitewiseCutpointsToUnsortedSegments(line))
-        file.write(str(line) +  ' or segments of lengths : ' + str(bitewiseCutpointsToUnsortedSegments(line)) + '\n')
+        print(line, ' or segments of lengths : ', segmentsToPositions(line))
+        file.write(str(line) +  ' or segments of lengths : ' + str(segmentsToPositions(line)) + '\n')
     print("\n")
 
 def oneSolutionCartesian (lists, totalDifference):

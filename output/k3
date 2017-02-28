@@ -1,20 +1,20 @@
 
 Solution : 
-[0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0] or segments of lengths : [2, 9, 7]
-[0 0 0 0 1 0 0 0 0 1 0 0 0 1 0 0 0 0] or segments of lengths : [4, 5, 4, 5]
-[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0] or segments of lengths : [16, 2]
+[0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0] or segments of lengths : [2, 11]
+[0 0 0 0 1 0 0 0 0 1 0 0 0 1 0 0 0 0] or segments of lengths : [4, 9, 13]
+[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0] or segments of lengths : [16]
 
 Solution : 
-[0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0] or segments of lengths : [2, 9, 7]
-[0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0] or segments of lengths : [4, 5, 5, 4]
-[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0] or segments of lengths : [16, 2]
+[0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0] or segments of lengths : [2, 11]
+[0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0] or segments of lengths : [4, 9, 14]
+[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0] or segments of lengths : [16]
 
 Solution : 
-[0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0] or segments of lengths : [7, 9, 2]
-[0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0] or segments of lengths : [4, 5, 5, 4]
-[0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0] or segments of lengths : [2, 16]
+[0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0] or segments of lengths : [7, 16]
+[0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0] or segments of lengths : [4, 9, 14]
+[0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0] or segments of lengths : [2]
 
 Solution : 
-[0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0] or segments of lengths : [7, 9, 2]
-[0 0 0 0 0 1 0 0 0 1 0 0 0 0 1 0 0 0] or segments of lengths : [5, 4, 5, 4]
-[0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0] or segments of lengths : [2, 16]
+[0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0] or segments of lengths : [7, 16]
+[0 0 0 0 0 1 0 0 0 1 0 0 0 0 1 0 0 0] or segments of lengths : [5, 9, 14]
+[0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0] or segments of lengths : [2]
