@@ -8,10 +8,6 @@ As discovered by H. Smith in the 70s, DNA molecules can be split in fragments
 using the restriction enzyme HindII. This enzyme breaks a long chain at occurrences of
 sequences GTGCAC and GTTAAC, resulting in a set of fragments whose length can be
 measured. Positions in the chain where one of these sequences appear are called sites.
-Two processes have been used :  
-Complete digest, where there are no remaining GTGCAC or GTTAAC in any fragment.
-In this case, the multi-set of lengths obtained is exactly the set of distances between
-two consecutive sites.  
 
 Reconstructing the postions of sites given fragment lengths – also know as restriction
 mapping – turned out to be a very important process, because it was a first approach
@@ -19,7 +15,7 @@ towards DNA sequencing, multiple decades earlier.
 
 Getting a map of a single type of sites was interesting, but other restriction enzymes
 could be combined. In the Double- or more generally Multi-Digest Problem, DNA
-molecules are exposed to k dierent enzymes, first individually, and then combined.We
+molecules are exposed to k different enzymes, first individually, and then combined.We
 end up with k complete digests for each of the enzymes, and then one complete digest
 for all combined enzymes.  
 
@@ -72,7 +68,7 @@ BruteForceCompleteDigest(inputSets)
 
 ```
 This version had the following optimisations:
-- When generating permutations, duplicates are removed (2, 3, 3) will produce only
+- When generating permutations, duplicates are removed E.g. (2, 3, 3) will produce only
 (2, 3, 3), (3, 2, 3) and (3, 3, 2)
 - Rather then transforming the permutations to a possitions array, I transform it to a bitwise
 representation (for instance [1, 3, 3, 2, 1]  produces [0 1 0 0 1 0 0 1 0 1]). 
