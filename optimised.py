@@ -236,5 +236,5 @@ def exhaustiveSearch(input, generateAllSolutions):
 
 fileName = 'k3'
 input = getInputFromFile("input/" + fileName)
-exhaustiveSearch(input, True)
+exhaustiveSearch(input, False)
 
