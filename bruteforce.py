@@ -122,7 +122,7 @@ def exhaustiveSearch(input):
 #RUN
 #########################
 
-input = getInputFromFile('example')
+input = getInputFromFile('input/example')
 print("Input file: ",  input)
 exhaustiveSearch(input)
 
