@@ -1,28 +1,29 @@
 import unittest
 import optimised
+import permutations as permutations_package
 
 class OptimisedTest(unittest.TestCase):
 
     def test_no_permutations(self):
         input = []
-        result = optimised.permutationsNoDuplicates(input)
+        result = permutations_package.permutationsNoDuplicates(input)
         self.assertEqual(result , [])
 
 
     def test_no_duplicates(self):
         input = [2,2,2]
-        result = optimised.permutationsNoDuplicates(input)
+        result = permutations_package.permutationsNoDuplicates(input)
         self.assertEqual(result , [input])
 
 
     def test_1_permutation(self):
         input = [1]
-        result = optimised.permutationsNoDuplicates(input)
+        result = permutations_package.permutationsNoDuplicates(input)
         self.assertEqual(result , [1])
 
     def test_4_permutations(self):
         input = [1,2,3,4]
-        result = optimised.permutationsNoDuplicates(input)
+        result = permutations_package.permutationsNoDuplicates(input)
         self.assertTrue(len(result) == 24)
 
     def test_segmentToBitwiseCutpointsConverter(self):

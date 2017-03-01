@@ -37,6 +37,12 @@ _bruteforce.py_ file is the first unoptimised version of exhaustive search
 
 _optimised.py_ is the optimised implemementation (details in the next paragraph)
 
+_cartesian.py_ contains 2 implemetations for cartesian product
+
+_permutations.py_ contains 2 implementations for permutations
+
+_digestutils.py_ contains reusable building blocks throughout all files
+
 _test_digest.py_ and _test_optimised.py_ unit test a part of the implemented functions
  
 _input_ folder contains input files

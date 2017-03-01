@@ -1,3 +1,4 @@
+import permutations as permutations_package
 
 def getInputFromFile(filename):
     input = []
@@ -10,24 +11,6 @@ def getInputFromFile(filename):
 
 
 
-def allPermutations(inputArray):
-    ''''
-    Generates an array of all possible permutations of inputArray
-    '''
-    if len(inputArray) == 0 :
-        return []
-    if len(inputArray) == 1 :
-        return inputArray
-    if len(inputArray) == 2:
-        return [inputArray, inputArray[:: -1]]
-    result = []
-    for i in range(len(inputArray)):
-        #set one element and permute the rest
-        currentElement = inputArray[i]
-        remaining  = inputArray[:i] + inputArray [i + 1 :]
-        for p in allPermutations(remaining):
-            result.append([currentElement] + p)
-    return result
 
 
 def cutpoints(inputArray):
@@ -100,7 +83,7 @@ def exhaustiveSearch(input):
 
     allKPermutations = []
     for i in range(len(input) - 1):
-        permutations = allPermutations(input[i])
+        permutations = permutations_package.allPermutations(input[i])
         positions = [cutpoints(i) for i in permutations]
         allKPermutations.append(positions)
 
